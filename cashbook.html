@@ -1,0 +1,36 @@
+<html>
+
+<head>
+	<title>Cashbook</title>
+</head>
+
+<body>
+	<form action="/submit" method="post">
+		<label for="CusName">Name:</label>
+		<input type="text" id="CusName" name="CusName" required><br><br>
+
+		<label for="credit">Credit:</label>
+		<input type="number" id="credit" name="credit"><br><br>
+
+		<label for="debit">Debit:</label>
+		<input type="number" id="debit" name="debit"><br><br>
+
+		<input type="submit" value="submit">
+
+		<script>
+			const form = document.querySelector('form');
+			form.addEventListener('submit', (e) => {
+				if (!document.getElementById('credit').value && !document.getElementById('debit').value) {
+					alert('Please enter either credit or debit amount');
+					e.preventDefault();
+				}
+				if (document.getElementById('credit').value && document.getElementById('debit').value) {
+					alert('Please enter either credit or debit amount, not both');
+					e.preventDefault();
+				}
+			});
+		</script>
+	</form>
+</body>
+
+</html>

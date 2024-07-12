@@ -11,12 +11,12 @@ var database = mysql.createConnection({
   database: "finance"
 }); // assume you have a database connection setup
 
-// var book = require('./book.js')
-
+//home page for cashbook
 app.get("/", (req, res) => {
   res.sendFile(__dirname + '/cashbook.html')
 })
 
+//get all customer details with credit and debit details
 app.get('/getallcash', function (req, res) {
 
   database.connect((err) => {
@@ -40,6 +40,7 @@ app.get('/getallcash', function (req, res) {
 
 })
 
+//get particular customer cash balance via customer name
 app.get('/getcashdata/:custname', function (req, res) {
   const data = req.params.custname
   const query = 'SELECT date,t.CusName, t.credit, t.debit, (SELECT SUM(tt.credit - tt.debit) FROM cashbook tt WHERE tt.CusName = t.CusName AND tt.Date <= t.Date) AS Total FROM cashbook t where t.CusName=? ORDER BY t.CusName, t.Date;'
@@ -52,6 +53,7 @@ app.get('/getcashdata/:custname', function (req, res) {
   })
 })
 
+//Store data to the cashbook database
 app.post('/submit', (req, res) => {
   // Define the data to be passed to the query
   const data_body = req.body;
@@ -71,5 +73,5 @@ app.post('/submit', (req, res) => {
 })
 
 
-
+//listening to the port number : 2000
 app.listen(2000)

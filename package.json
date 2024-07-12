@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.2",
+    "route": "^0.2.5",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "name": "cashbook",
+  "version": "1.0.0",
+  "main": "cashbook.js",
+  "scripts": {
+    "nodemon": "nodemon cashbook.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

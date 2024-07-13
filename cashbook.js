@@ -1,15 +1,18 @@
 var express = require('express')
 var app = express()
 const bodyParser = require('body-parser');
-var mysql = require('mysql2')
+var mysql = require('mysql2');
+const database_connection = require('./Server');
 app.use(bodyParser.json());
 
-var database = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "raja",
-  database: "finance"
-}); // assume you have a database connection setup
+// var database = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "raja",
+//   database: "finance"
+// }); // assume you have a database connection setup
+
+var database = mysql.createConnection(database_connection)
 
 // var book = require('./book.js')
 

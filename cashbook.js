@@ -4,27 +4,22 @@ const bodyParser = require('body-parser');
 var mysql = require('mysql2');
 const { database_connection } = require('./Server');
 app.use(bodyParser.json());
-var Personal = require('./Personal')
-var database = mysql.createConnection(database_connection); // assume you have a database connection setup
 
-var create_table_query = "create table cashbook (Date datetime primary key not null, CusName varchar(20) not null, credit integer, debit integer,remarks varchar(50));"
-const data = "Cashbook table created already"
+var database = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "raja",
+  database: "finance"
+}); // assume you have a database connection setup
 
-database.query(create_table_query, data, (err, results) => {
-  if (!err) {
-    console.log("Cashbook table created")
-    return;
-  }
+var database = mysql.createConnection(database_connection)
 
-  console.log(data)
-})
+// var book = require('./book.js')
 
-//home page for cashbook
 app.get("/", (req, res) => {
   res.sendFile(__dirname + '/cashbook.html')
 })
 
-//get all customer details with credit and debit details
 app.get('/getallcash', function (req, res) {
 
   database.connect((err) => {
@@ -48,7 +43,6 @@ app.get('/getallcash', function (req, res) {
 
 })
 
-//get particular customer cash balance via customer name
 app.get('/getcashdata/:custname', function (req, res) {
   const data = req.params.custname
   const query = 'SELECT date,t.CusName, t.credit, t.debit, (SELECT SUM(tt.credit - tt.debit) FROM cashbook tt WHERE tt.CusName = t.CusName AND tt.Date <= t.Date) AS Total FROM cashbook t where t.CusName=? ORDER BY t.CusName, t.Date;'
@@ -61,7 +55,8 @@ app.get('/getcashdata/:custname', function (req, res) {
   })
 })
 
-//Store data to the cashbook database
+
+
 app.post('/submit', (req, res) => {
   // Define the data to be passed to the query
   const data_body = req.body;
@@ -80,6 +75,6 @@ app.post('/submit', (req, res) => {
   })
 })
 
-//listening to the port number : 2000
+
 app.listen(2000)
 

@@ -7,6 +7,17 @@ app.use(bodyParser.json());
 
 var database = mysql.createConnection(database_connection); // assume you have a database connection setup
 
+var create_table_query = "create table cashbook (Date datetime primary key not null, CusName varchar(20) not null, credit integer, debit integer,remarks varchar(50));"
+const data = "table created"
+database.query(create_table_query, data, (err, results) => {
+  if (!err) {
+    console.log("table created")
+    return;
+  }
+
+  console.log("table already available")
+})
+
 //home page for cashbook
 app.get("/", (req, res) => {
   res.sendFile(__dirname + '/cashbook.html')

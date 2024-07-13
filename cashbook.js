@@ -4,18 +4,19 @@ const bodyParser = require('body-parser');
 var mysql = require('mysql2');
 const { database_connection } = require('./Server');
 app.use(bodyParser.json());
-
+var Personal = require('./Personal')
 var database = mysql.createConnection(database_connection); // assume you have a database connection setup
 
 var create_table_query = "create table cashbook (Date datetime primary key not null, CusName varchar(20) not null, credit integer, debit integer,remarks varchar(50));"
-const data = "table created"
+const data = "Cashbook table created already"
+
 database.query(create_table_query, data, (err, results) => {
   if (!err) {
-    console.log("table created")
+    console.log("Cashbook table created")
     return;
   }
 
-  console.log("table already available")
+  console.log(data)
 })
 
 //home page for cashbook
@@ -79,6 +80,6 @@ app.post('/submit', (req, res) => {
   })
 })
 
-
 //listening to the port number : 2000
 app.listen(2000)
+

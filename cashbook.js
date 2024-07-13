@@ -4,12 +4,7 @@ const bodyParser = require('body-parser');
 var mysql = require('mysql2')
 app.use(bodyParser.json());
 
-var database = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "raja",
-  database: "finance"
-}); // assume you have a database connection setup
+var database = mysql.createConnection(database_connection); // assume you have a database connection setup
 
 //home page for cashbook
 app.get("/", (req, res) => {

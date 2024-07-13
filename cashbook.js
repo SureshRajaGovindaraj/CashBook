@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // }); // assume you have a database connection setup
 
 var database = mysql.createConnection(database_connection)
-
+console.log("working fine")
 // var book = require('./book.js')
 
 app.get("/", (req, res) => {

@@ -1,5 +1,3 @@
-var mysql = require('mysql2');
-
 var database_connection ={
   host: "localhost",
   user: "root",

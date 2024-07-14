@@ -2,6 +2,8 @@ var mysql = require('mysql2')
 var express = require('express')
 const { database_connection } = require('./Server')
 var app = express()
+var { Router } = require('express')
+var router = Router()
 
 var database = mysql.createConnection(database_connection); // assume you have a database connection setup
 
@@ -16,9 +18,14 @@ database.query(create_table_query, data, (err) => {
     console.log(data)
 })
 
-app.get("/getallCustomers", (req, res) => {
 
-    res.send("api working")
-    console.log("api working")
+router.get("/getAllCustomers", function (req, res) {
+res.send("api working")
+console.log("api working")
+
 })
 
+
+
+
+module.exports = router

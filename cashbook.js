@@ -2,10 +2,13 @@ var express = require('express')
 var app = express()
 const bodyParser = require('body-parser');
 var mysql = require('mysql2');
-const database_connection = require('./Server');
-app.use(bodyParser.json());
 
+var router = require('./Personal')
+const database_connection = require('./Server');
+const { getAllCustomers } = require('./Personal');
+app.use(bodyParser.json());
 var database = mysql.createConnection(database_connection)
+
 
 var create_table_query = "create table cashbook (Date datetime primary key, CusName varchar(20) not null, credit integer, debit integer, remarks varchar(50));"
 var data = "Customer Details table created already"
@@ -76,6 +79,13 @@ app.post('/submit', (req, res) => {
   })
 })
 
+// app.get("/getAllCustomers", (req, res) => {
 
+// console.log(getAllCustomers())
+//   res.send(getAllCustomers())
+// })
+
+app.use('*',router)
 
 app.listen(2000)
+

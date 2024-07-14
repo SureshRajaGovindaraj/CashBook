@@ -1,9 +1,10 @@
-var database_connection ={
+var database_connection = {
   host: "localhost",
   user: "root",
   password: "raja",
-  database:"finance"}
+  database: "finance"
+}
 
-module.exports={
+module.exports = {
   database_connection
 }

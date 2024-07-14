@@ -16,8 +16,8 @@ database.query(create_table_query, data, (err) => {
     console.log(data)
 })
 
-app.get("/getallCustomers", (req,res)=>{
-    
+app.get("/getallCustomers", (req, res) => {
+
     res.send("api working")
     console.log("api working")
 })

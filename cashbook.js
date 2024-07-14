@@ -2,17 +2,22 @@ var express = require('express')
 var app = express()
 const bodyParser = require('body-parser');
 var mysql = require('mysql2');
-const { database_connection } = require('./Server');
+const database_connection = require('./Server');
 app.use(bodyParser.json());
 
-var database = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "raja",
-  database: "finance"
-}); // assume you have a database connection setup
-
 var database = mysql.createConnection(database_connection)
+
+var create_table_query = "create table cashbook (Date datetime primary key, CusName varchar(20) not null, credit integer, debit integer, remarks varchar(50));"
+const data = "Customer Details table created already"
+
+database.query(create_table_query, data, (err) => {
+    if (!err) {
+        console.log("New table ==> Customer Details table created")
+        return;
+    }
+    console.log(data)
+})
+
 
 // var book = require('./book.js')
 
@@ -76,5 +81,5 @@ app.post('/submit', (req, res) => {
 })
 
 
-app.listen(2000)
 
+app.listen(2000)

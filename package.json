@@ -2,7 +2,7 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "cashbook": "file:",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.2",
     "route": "^0.2.5",
